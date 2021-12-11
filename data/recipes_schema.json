@@ -1,0 +1,90 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "recipes": {
+        "type": "array",
+        "items": {
+            "$ref": "#/definitions/recipe"
+        }
+    },
+    "required": ["recipes"],
+    "definitions": {
+        "recipe": {
+            "type": "object",
+            "additionalProperties": false,
+            "prperties": {
+                "source": {
+                    "type": "string",
+                    "description": "URL where this recipe was found"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "§ref": "#/definitions/tag"
+                    }
+                },
+                "servings": {
+                    "type": "integer",
+                    "description": "number of servings for the given list of ingredients"
+                },
+                "ingredients": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ingredient"
+                    }
+                },
+                "instructions": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "effort": {
+                    "type": "object",
+                    "properties": {
+                        "preparationTime": {
+                            "description": "preparation time in minutes",
+                            "type": "integer"
+                        },
+                        "cookingTime": {
+                            "description": "cooking time in minutes",
+                            "type": "integer"
+                        }
+                    },
+                    "required": [ "preparationTime" ]
+                }
+            },
+            "required": ["ingredients", "instructions", "title", "effort", "servings"]
+        },
+        "ingredient": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "amount": "integer",
+                    "unit": "string"
+                },
+                "amount": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "type": "string"
+                },
+                "optional": {
+                    "type": "boolean",
+                    "default": false
+                }
+            },
+            "required": ["name"]
+        },
+        "tag": {
+            "type": "string",
+            "enum": ["vegetarisch", "rind", "hähnchen", "fisch", "auflauf", "suppe", "snack", "fastfood"]
+        }
+    }
+}

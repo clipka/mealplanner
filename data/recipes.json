@@ -1,0 +1,186 @@
+{
+    "$schema": "./recipes_schema.json",
+    "recipes": [
+        {
+            "source": "https://www.familienkost.de/rezept_gefuellte_paprikaschoten_mit_reis_und_hackfleisch.html",
+            "title": "Gefüllte Paprikaschoten mit Reis und Hackfleisch",
+            "tags": ["fleisch"],
+            "effort": {
+                "preparationTime": 15,
+                "cookingTime": 60
+            },
+            "servings": 6,
+            "ingredients": [
+                {
+                    "name": "Paprikaschoten",
+                    "amount": 6
+                },
+                {
+                    "name": "Hackfleisch",
+                    "amount": 750,
+                    "unit": "g"
+                },
+                {
+                    "name": "Reis",
+                    "amount": 125,
+                    "unit": "g"
+                },
+                {
+                    "name": "kleine Zwiebel",
+                    "amount": 1
+                },
+                {
+                    "name": "Knoblauchzehe",
+                    "amount": 1
+                },
+                {
+                    "name": "Eier",
+                    "amount": 2
+                },
+                {
+                    "name": "Salz, Pfeffer"
+                },
+                {
+                    "name": "Tomatenmark"
+                }
+            ],
+            "instructions": [
+                "Wasche die Paprikaschoten gut ab und schneide dann den Deckel ab. Höhle die Paprikaschoten mit einem scharfen Messer und einem Teelöffel aus und spüle sie nochmal ab.",
+                "Nun bereitest du die Hackfleisch-Reis-Füllung vor. Dafür kochst du den Reis nach Packungsanleitung und gießt ihn ab. Schäle die Zwiebel und den Knoblauch, würfel beides klein und schwitze es mit etwas Öl in einer Pfanne an. Mische nun das Hackfleisch mit dem Reis, der angebratenen Zwiebel-Knoblauch-Mischung und den beiden Eiern. Würze kräftig mit Salz und Pfeffer.",
+                "Jetzt nimmst du dir wieder die Paprikaschoten und füllst sie mit der Hackfleischmasse.",
+                "Erhitze etwas Öl in einer Pfanne und brate die Paprikaschoten darin kurz kräftig an. Gib sie dann mit etwas Wasser für etwa 1 Stunde in den auf 160°C Ober- und Unterhitze vorgeheizten Backofen und lass sie darin schmoren. Die Paprikadeckel legst du nach der Hälfte der Zeit einfach mit in den Ofen.",
+                "Wenn die gefüllten Paprikaschoten gar sind nimmst du sie aus dem Ofen und gibst sie auf einen großen Teller.",
+                "Verrühre den Bratensaft mit etwas Tomatenmark, Speisestärke und Creme Fraiche zu einer feinen Sauce, die du nach Belieben abschmecken kannst."
+            ]
+        },
+        {
+            "source": "https://www.familienkost.de/rezept_kaesestangen.html",
+            "title": "Köstliche Käsestangen aus dem Backofen",
+            "effort": {
+                "preparationTime": 15,
+                "cookingTime": 15
+            },
+            "servings": 5,
+            "tags": [ "snack", "vegetarisch" ],
+            "ingredients": [
+                {
+                    "name": "Blätterteig",
+                    "amount": 1,
+                    "unit": "Packung"
+                },
+                {
+                    "name": "geriebener Käse",
+                    "amount": 125,
+                    "unit": "g"
+                },
+                {
+                    "name": "Sesam",
+                    "amount": 2,
+                    "unit": "EL"
+                },
+                {
+                    "name": "Eier",
+                    "amount": 1
+                }
+            ],
+            "instructions": [
+                "Nimm den Blätterteig aus dem Kühlschrank.",
+                "Rolle ihn aus und lasse ihn für 10 Minuten liegen.",
+                "Streue auf die eine Hälfte des Blätterteigs den Reibekäse und den Sesam. Lege nun die Hälfte des Blätterteigs ohne Belag auf die andere.",
+                "Schneide den Blätterteig in schmale Streifen und drehe den Teig wie Korkenzieher.",
+                "Lege die Teigstreifen mit etwas Abstand auf ein mit Backpapier belegten Backblech. Verrühre das Ei und bestreiche die Blätterteigstangen damit.",
+                "Streue etwas Käse über die Teigstangen.",
+                "Backe die Käsestangen im vorgeheizten Ofen bei 220°C Ober- und Unterhitze für 15 Minuten."
+            ]
+        },
+        {
+            "title": "Vegetarische Frikadellen mit Kidneybohnen",
+            "source": "https://www.familienkost.de/rezept_vegetarische_frikadellen.html",
+            "effort": {
+                "preparationTime": 25
+            },
+            "tags": ["vegetarisch"],
+            "servings": 4,
+            "ingredients": [
+                {
+                    "name": "Kidneybohnen",
+                    "amount": 1,
+                    "unit": "Dose"
+                },
+                {
+                    "name": "zarte Haferflocken",
+                    "amount": 60,
+                    "unit": "g"
+                },
+                {
+                    "name": "geriebener Käse",
+                    "amount": 100,
+                    "unit": "g"
+                },
+                {
+                    "name": "Eier",
+                    "amount": 1
+                },
+                {
+                    "name": "Zwiebel",
+                    "amount": 1
+                },
+                {
+                    "name": "Knoblauchzehe",
+                    "amount": 1
+                },
+                {
+                    "name": "ein paar Stängel Petersilie"
+                },
+                {
+                    "name": "Salz"
+                },
+                {
+                    "name": "mildes Paprikapulver"
+                },
+                {
+                    "name": "Kreuzkümmel",
+                    "optional": true
+                },
+                {
+                    "name": "Currypulver",
+                    "optional": true
+                }
+            ],
+            "instructions": [
+                "Spüle die Kidneybohnen in einem Sieb unter fließendem Wasser ab.",
+                "Gib sie dann in eine Schüssel und zerdrücke sie gut. Du kannst auch einen Pürierstab zur Hilfe nehmen.",
+                "Schneide die Zwiebel und die Knoblauchzehe sehr klein und gib sie zur Bohnenmasse.",
+                "Außerdem fügst du das Ei, die gehackte Petersilie, die Haferflocken und den geriebenen Käse hinzu.",
+                "Würze die Masse mit Salz und Paprikapulver und knete sie dann zu einem homogenen Teig.",
+                "Erhitze etwas Öl in einer Pfanne.",
+                "Forme kleine Bällchen aus dem Teig, gib sie in die Pfanne und drücke sie mit einer Gabel etwas platt. Brate sie bei mittlerer Hitze von allen Seiten knusprig an."
+            ]
+        },
+        {
+            "title": "Kartoffelpuffer mit Apfelmus",
+            "tags": ["vegetarisch"],
+            "effort": {
+                "preparationTime": 20
+            },
+            "servings": 4,
+            "ingredients": [
+                {
+                    "name": "Kartoffelpuffer (10 Stk.)",
+                    "amount": 2,
+                    "unit": "Packung"
+                },
+                {
+                    "name": "Apfelmus",
+                    "amount": 1,
+                    "unit": "Glas"
+                }
+            ],
+            "instructions": [
+                "Heize die Friteuse vor auf 190 Grad Celsius vor.",
+                "Alternativ: Erhitze Öl in einer Pfanne",
+                "Gib jeweils 4-5 Kartoffelpuffer in die Friteuse für 4 Minuten oder brate sie in der Pfanne goldbraun an"
+            ]
+        }
+    ]
+}
