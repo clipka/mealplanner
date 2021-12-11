@@ -7,10 +7,27 @@ Initial structure of the project is based on: https://github.com/zueve/rentomati
 
 Mealplanner is a collection of food that the family enjoys eating. Goal is to create a list of recipes that can be chosen via an API. Out of this list of recipes, a shopping list can be generated to ease the weekly grocery shopping.
 
+
+## Initiate
+
+Create python virtual environment and install required packages
+
+```
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
 ## Start
 
+Start the service
+
+```
 .\venv\Scripts\activate
 uvicorn mealplanner.app:app --reload --port 8080
+```
+
+Open browser and go to ```http://127.0.0.1:8080/meals```
 
 ## Ideas backlog
 
