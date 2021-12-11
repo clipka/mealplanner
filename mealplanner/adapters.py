@@ -22,3 +22,8 @@ class JsonStorage(s.MealPlanner):
                 result.append(meal)
 
         return result
+
+    def get_meal(self, id) -> s.Meal:
+        if id > len(self._storage):
+            return None
+        return self._storage[id]

@@ -17,6 +17,7 @@ class Ingredient(BaseModel):
 
 class Meal(BaseModel):
     source: Optional[str]
+    id: int
     title: str
     description: Optional[str]
     tags: List[str]
@@ -56,3 +57,11 @@ class ShowRandomMealUseCase:
             rnd_meals.append(meals[rnd])
 
         return rnd_meals
+
+
+class ShowMealDetailsUseCase:
+    def __init__(self, repo: MealPlanner):
+        self.repo = repo
+
+    def show_meal(self, id: int) -> Meal:
+        return self.repo.get_meal(id)

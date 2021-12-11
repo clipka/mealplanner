@@ -2,6 +2,7 @@
     "$schema": "./recipes_schema.json",
     "recipes": [
         {
+            "id": 0,
             "source": "https://www.familienkost.de/rezept_gefuellte_paprikaschoten_mit_reis_und_hackfleisch.html",
             "title": "Gefüllte Paprikaschoten mit Reis und Hackfleisch",
             "tags": ["fleisch"],
@@ -54,6 +55,7 @@
             ]
         },
         {
+            "id": 1,
             "source": "https://www.familienkost.de/rezept_kaesestangen.html",
             "title": "Köstliche Käsestangen aus dem Backofen",
             "effort": {
@@ -94,6 +96,7 @@
             ]
         },
         {
+            "id": 2,
             "title": "Vegetarische Frikadellen mit Kidneybohnen",
             "source": "https://www.familienkost.de/rezept_vegetarische_frikadellen.html",
             "effort": {
@@ -158,6 +161,7 @@
             ]
         },
         {
+            "id": 3,
             "title": "Kartoffelpuffer mit Apfelmus",
             "tags": ["vegetarisch"],
             "effort": {
@@ -183,6 +187,7 @@
             ]
         },
         {
+            "id": 4,
             "title": "Feldsalat mit Granatapfel",
             "tags": ["salat", "vegetarisch"],
             "source": "https://www.familienkost.de/rezept_feldsalat_granatapfel.html",
@@ -220,6 +225,7 @@
             ]
         },
         {
+            "id": 5,
             "title": "Champignons wie vom Weihnachtsmarkt",
             "source": "https://www.familienkost.de/rezept_champignons_wie_vom_weihnachtsmarkt.html",
             "servings": 2,

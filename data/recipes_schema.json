@@ -12,6 +12,10 @@
             "type": "object",
             "additionalProperties": false,
             "prperties": {
+                "id": {
+                    "type": "integer",
+                    "description": "Unique identifier of the recipe"
+                },
                 "source": {
                     "type": "string",
                     "description": "URL where this recipe was found"
@@ -59,7 +63,7 @@
                     "required": [ "preparationTime" ]
                 }
             },
-            "required": ["ingredients", "instructions", "title", "effort", "servings"]
+            "required": ["id", "ingredients", "instructions", "title", "effort", "servings"]
         },
         "ingredient": {
             "type": "object",
