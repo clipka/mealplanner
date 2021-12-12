@@ -33,10 +33,13 @@ Open browser and go to ```http://127.0.0.1:8080/meals```
 
 - [x] Generate API to get recipes
 - [x] API for a random meal
-- [ ] shopping lists etc
+- [x] shopping lists etc
 - [ ] add interface to add new recipes
 - [ ] replace json file storage with data base if it gets bigger
 - [ ] create meal plan for the next x days
-- [ ] add certain filter operations to chose, e.g. only vegetarian, least cooked food, certain tags etc.
+- [ ] add certain filter operations to chose, e.g. only vegetarian, certain tags etc.
+- [ ] add filter for least cooked food
 - [ ] calculate amount of servings based on baselined ingredients
+- [ ] create meal plan for next x days
+- [ ] connect Alexa to meal planner to tell what to cook today
 - [ ] ...

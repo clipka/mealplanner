@@ -27,6 +27,10 @@ class Meal(BaseModel):
     instructions: List[str]
 
 
+class ShoppingList(BaseModel):
+    items: List[Ingredient]
+
+
 class MealFilter(BaseModel):
     tag: Optional[str] = None
 
@@ -65,3 +69,33 @@ class ShowMealDetailsUseCase:
 
     def show_meal(self, id: int) -> Meal:
         return self.repo.get_meal(id)
+
+
+class ShoppingListUseCase:
+    def __init__(self, repo: MealPlanner):
+        self.repo = repo
+
+    def get_shopping_list(self, ids: List[int]) -> ShoppingList:
+        sl = ShoppingList(items=[])
+        meals = self.repo.get_meals(MealFilter())
+
+        for id in ids:
+            if id > len(meals):
+                return ShoppingList(items=[])
+
+            meal = meals[id]
+            for ingredient in meal.ingredients:
+                _found = False
+                # check if ingredient is in shoppinglist already
+                # if in, just increase amount if available
+                for item in sl.items:
+                    if item.name == ingredient.name:
+                        _found = True
+                        if item.amount:
+                            item.amount += ingredient.amount
+                        break
+
+                if not _found:
+                    sl.items.append(ingredient)
+
+        return sl

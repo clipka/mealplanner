@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from fastapi import FastAPI, Depends, Path, HTTPException
+from fastapi.param_functions import Query
 from mealplanner import adapters, services
 
 
@@ -18,6 +19,10 @@ def get_meal_use_case() -> services.ShowMealDetailsUseCase:
 
 def get_random_use_case() -> services.ShowRandomMealUseCase:
     return services.ShowRandomMealUseCase(adapters.JsonStorage())
+
+
+def get_shopping_list_use_case() -> services.ShoppingListUseCase:
+    return services.ShoppingListUseCase(adapters.JsonStorage())
 
 
 @app.post("/meals", response_model=List[services.Meal])
@@ -52,3 +57,19 @@ def get_random_meals(num: Optional[int] = None,
         num = 1
 
     return use_case.show_random_meals(num)
+
+
+@app.get("/shopping_list", response_model=services.ShoppingList)
+def get_shopping_list(meals: List[int] = Query(None), use_case=Depends(get_shopping_list_use_case)):
+    if not meals:
+        raise HTTPException(status_code=400, detail="At least one meal id must be provided")
+    for m in meals:
+        if m < 0:
+            raise HTTPException(status_code=404, detail="One or multiple ids < 0")
+
+    sl = use_case.get_shopping_list(meals)
+
+    if len(sl.items) == 0:
+        raise HTTPException(status_code=404, detail="One or multiple ids not found")
+
+    return sl
