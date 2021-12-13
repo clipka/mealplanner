@@ -280,6 +280,96 @@
                 "Würze die Champignons mit Pfeffer und Salz. Streue nun den Schnittlauch darüber und rühre die Champignons um.",
                 "Serviere die Champignons mit der Knoblauchcreme. Du magst keinen Knobi? Dann lasse ihn einfach weg und du hast einen leckeren Kräuterdip."
             ]
+        },
+        {
+            "id": 6,
+            "title": "Afrikanischer Erdnusseintopf",
+            "servings": 6,
+            "tags": [ "fleisch" ],
+            "effort": {
+                "preparationTime": 10,
+                "cookingTime": 30
+            },
+            "source": "https://www.lecker.de/afrikanischer-erdnusseintopf-80899.html",
+            "ingredients": [
+                {
+                    "name": "Zwiebel",
+                    "amount": 1
+                },
+                {
+                    "name": "Knoblauchzehe",
+                    "amount": 1
+                },
+                {
+                    "name": "Ingwer",
+                    "unit": "Stück (3cm)"
+                },
+                {
+                    "name": "Süßkartoffel",
+                    "amount": 1
+                },
+                {
+                    "name": "Möhre",
+                    "amount": 1
+                },
+                {
+                    "name": "gelbe Paprika",
+                    "amount": 1
+                },
+                {
+                    "name": "Frühlingszwiebel",
+                    "amount": 2
+                },
+                {
+                    "name": "Hähnchenbrust",
+                    "amount": 600,
+                    "unit": "g"
+                },
+                {
+                    "name": "Öl",
+                    "amount": 2,
+                    "unit": "EL"
+                },
+                {
+                    "name": "Salz und Pfeffer"
+                },
+                {
+                    "name": "Paprikapulver",
+                    "amount": 1,
+                    "unit": "EL"
+                },
+                {
+                    "name": "Hühnerbrühe",
+                    "amount": 400,
+                    "unit": "ml"
+                },
+                {
+                    "name": "stückige Tomaten",
+                    "amount": 1,
+                    "unit": "Dose"
+                },
+                {
+                    "name": "Erdnussbutter",
+                    "amount": 150,
+                    "unit": "g"
+                },
+                {
+                    "name": "Reis",
+                    "amount": 200,
+                    "unit": "g"
+                },
+                {
+                    "name": "Erdnüsse (geröstet und gesalzen)",
+                    "amount": 50,
+                    "unit": "g"
+                }
+            ],
+            "instructions": [
+                "Zwiebel, Knoblauch und Ingwer schälen und hacken. Süßkartoffel und Möhre schälen und fein würfeln. Paprika putzen und würfeln. Frühlingszwiebeln putzen und in feine Ringe schneiden. Fleisch würfeln.",
+                "Öl in einem großen Topf erhitzen. Hähnchenbrust rundherum bei starker Hitze anbraten, dann Temperatur herunterschalten. Zwiebeln, Knoblauch Ingwer, Salz, Pfeffer, Paprikapulver und Cayennepfeffer hinzufügen und ca. 5 Minuten mitbraten. Mit Brühe und Tomaten ablöschen. Möhre, Süßkartoffel und Erdnussbutter dazugeben und 20 Minuten köcheln.",
+                "Reis nach Packungsanweisung in einem weiteren Topf kochen. Paprika zum Erdnusseintopf geben, unterrühren und weitere 10 Minuten köcheln.",
+                "Eintopf mit Gewürzen abschmecken. Frühlingszwiebeln und Erdnüsse darüber streuen. Mit Reis servieren."
+            ]
         }
     ]
 }
