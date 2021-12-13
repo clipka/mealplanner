@@ -8,7 +8,6 @@ from mealplanner import services as s
 class JsonStorage(s.MealPlanner):
 
     def __init__(self):
-        print(f"cwd: {os.getcwd()}")
         with open(os.path.join("data", "recipes.json"), 'r', encoding='utf-8') as file:
             content = file.read()
         data = json.loads(content)

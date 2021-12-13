@@ -67,8 +67,16 @@ class ShowMealDetailsUseCase:
     def __init__(self, repo: MealPlanner):
         self.repo = repo
 
-    def show_meal(self, id: int) -> Meal:
-        return self.repo.get_meal(id)
+    def show_meal(self, id: int, detail: str = None) -> Meal:
+        meal = self.repo.get_meal(id)
+        print(f"id: {id}, detail: {detail}, {type(detail)}, meal: {meal}")
+        if detail is None:
+            return meal
+
+        if detail in meal:
+            return meal[detail]
+
+        return None
 
 
 class ShoppingListUseCase:

@@ -50,6 +50,18 @@ def get_meal(id: int = Path(..., ge=0), use_case=Depends(get_meal_use_case)):
     return use_case.show_meal(id)
 
 
+@app.get("/meals/{id}/{detail}")
+def get_meal_detail(id: int = Path(..., ge=0),
+                    detail: str = Path(..., ne=None),
+                    use_case=Depends(get_meal_use_case)):
+    meal = use_case.show_meal(id, detail)
+
+    if meal is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    return use_case.show_meal(id, detail)
+
+
 @app.get("/random_meals", response_model=List[services.Meal])
 def get_random_meals(num: Optional[int] = None,
                      use_case=Depends(get_random_use_case)):

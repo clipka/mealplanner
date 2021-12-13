@@ -37,7 +37,7 @@ Open browser and go to ```http://127.0.0.1:8080/meals```
 - [ ] add interface to add new recipes
 - [ ] replace json file storage with data base if it gets bigger
 - [ ] create meal plan for the next x days
-- [ ] add certain filter operations to chose, e.g. only vegetarian, certain tags etc.
+- [ ] add certain filter operations to choose, e.g. only vegetarian, certain tags etc.
 - [ ] add filter for least cooked food
 - [ ] calculate amount of servings based on baselined ingredients
 - [ ] create meal plan for next x days
