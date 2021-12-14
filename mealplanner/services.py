@@ -27,16 +27,21 @@ class Meal(BaseModel):
     instructions: List[str]
 
 
-class ShoppingList(BaseModel):
-    items: List[Ingredient]
-
-
 class MealFilter(BaseModel):
     tag: Optional[str] = None
 
 
 class MealPlanner:
     def get_meals(self, filters: MealFilter) -> List[Meal]: ...
+
+
+class ShoppingList(BaseModel):
+    id: int
+    items: List[Ingredient]
+
+
+class ShoppingLists:
+    def get_shooping_lists() -> List[ShoppingList]: ...
 
 
 class ShowMealsUseCase:
@@ -107,3 +112,11 @@ class ShoppingListUseCase:
                     sl.items.append(ingredient)
 
         return sl
+
+
+class AddShoppingListUseCase:
+    def __init__(self, repo: ShoppingLists):
+        self.repo = repo
+
+    def add_shopping_list(self) -> ShoppingList:
+        return self.repo.add_shopping_list()

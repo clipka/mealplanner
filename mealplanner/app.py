@@ -8,6 +8,8 @@ from mealplanner import adapters, services
 
 app = FastAPI()
 
+# use cases ##
+
 
 def get_use_case() -> services.ShowMealsUseCase:
     return services.ShowMealsUseCase(adapters.JsonStorage())
@@ -23,6 +25,13 @@ def get_random_use_case() -> services.ShowRandomMealUseCase:
 
 def get_shopping_list_use_case() -> services.ShoppingListUseCase:
     return services.ShoppingListUseCase(adapters.JsonStorage())
+
+
+def add_shopping_list_use_case() -> services.AddShoppingListUseCase:
+    return services.AddShoppingListUseCase(adapters.JsonShoppingListStorage())
+
+
+# API ##
 
 
 @app.post("/meals", response_model=List[services.Meal])
@@ -85,3 +94,8 @@ def get_shopping_list(meals: List[int] = Query(None), use_case=Depends(get_shopp
         raise HTTPException(status_code=404, detail="One or multiple ids not found")
 
     return sl
+
+
+@app.post("/shopping_lists", response_model=services.ShoppingList)
+def add_shopping_list(meals: List[int], use_case=Depends(add_shopping_list_use_case)):
+    return use_case.add_shopping_list()

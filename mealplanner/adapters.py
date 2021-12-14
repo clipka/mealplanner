@@ -26,3 +26,33 @@ class JsonStorage(s.MealPlanner):
         if id > len(self._storage):
             return None
         return self._storage[id]
+
+
+class JsonShoppingListStorage(s.ShoppingLists):
+
+    def __init__(self):
+        with open(os.path.join("data", "shopping_lists.json"), 'r', encoding='utf-8') as file:
+            content = file.read()
+        if content:
+            data = json.loads(content)
+            self._storage = data['shoppingLists']
+            print(f"sl storage: {self._storage}")
+        else:
+            self._storage = []
+
+    def add_shopping_list(self) -> s.ShoppingList:
+        if len(self._storage) == 0:
+            id = 0
+        else:
+            id = self._storage[len(self._storage)-1]['id'] + 1
+
+        sl = s.ShoppingList(id=id, items=[])
+        print(f"created: {sl}")
+        self._storage.append(sl.dict())
+        print(f"sl storage updated: {self._storage}")
+        with open(os.path.join("data", "shopping_lists.json"), 'w', encoding='utf-8') as file:
+            data = {}
+            data["$schema"] = "./shopping_lists_schema.json",
+            data["shoppingLists"] = self._storage
+            file.write(json.dumps(data, indent=4))
+        return sl

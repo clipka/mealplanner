@@ -1,0 +1,19 @@
+{
+    "$schema": [
+        "./shopping_lists_schema.json"
+    ],
+    "shoppingLists": [
+        {
+            "id": 0,
+            "items": []
+        },
+        {
+            "id": 1,
+            "items": []
+        },
+        {
+            "id": 2,
+            "items": []
+        }
+    ]
+}

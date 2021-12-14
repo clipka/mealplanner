@@ -1,0 +1,45 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "shoppingLists": {
+        "type": "array",
+        "items": {
+            "$ref": "#/definitions/shoppingList"
+        }
+    },
+    "required": [ "shoppingLists "],
+    "definitions": {
+        "shoppingList": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "unique id of shopping list"
+                },
+                "items": {
+                    "type": "array",
+                    "description": "items on the shopping list",
+                    "items": {
+                        "$ref": "#/definitions/ingredient"
+                    }
+                }
+            }
+        },
+        "ingredient": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "amount": {
+                    "type": "integer"
+                },
+                "unit": {
+                    "type": "string"
+                }
+            },
+            "required": [ "name" ]
+        }
+    }
+}
