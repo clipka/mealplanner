@@ -74,7 +74,6 @@ class ShowMealDetailsUseCase:
 
     def show_meal(self, id: int, detail: str = None) -> Meal:
         meal = self.repo.get_meal(id)
-        print(f"id: {id}, detail: {detail}, {type(detail)}, meal: {meal}")
         if detail is None:
             return meal
 

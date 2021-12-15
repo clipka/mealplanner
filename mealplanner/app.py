@@ -3,7 +3,8 @@
 from typing import List, Optional
 from fastapi import FastAPI, Depends, Path, HTTPException
 from starlette.responses import Response
-from mealplanner import adapters, services
+from mealplanner import services
+from storage import adapters
 
 
 app = FastAPI()
