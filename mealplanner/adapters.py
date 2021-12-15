@@ -40,6 +40,9 @@ class JsonShoppingListStorage(s.ShoppingLists):
         else:
             self._storage = []
 
+    def get_shopping_lists(self) -> List[s.ShoppingList]:
+        return self._storage
+
     def add_shopping_list(self) -> s.ShoppingList:
         if len(self._storage) == 0:
             id = 0
@@ -47,9 +50,8 @@ class JsonShoppingListStorage(s.ShoppingLists):
             id = self._storage[len(self._storage)-1]['id'] + 1
 
         sl = s.ShoppingList(id=id, items=[])
-        print(f"created: {sl}")
         self._storage.append(sl.dict())
-        print(f"sl storage updated: {self._storage}")
+
         with open(os.path.join("data", "shopping_lists.json"), 'w', encoding='utf-8') as file:
             data = {}
             data["$schema"] = "./shopping_lists_schema.json",

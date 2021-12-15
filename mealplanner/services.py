@@ -114,6 +114,32 @@ class ShoppingListUseCase:
         return sl
 
 
+class ViewShoppingListsUseCase:
+    def __init__(self, repo: ShoppingLists):
+        self.repo = repo
+
+    def get_shopping_lists(self) -> List[ShoppingList]:
+        return self.repo.get_shopping_lists()
+
+
+class ViewShoppingListUseCase:
+    def __init__(self, repo: ShoppingLists):
+        self.repo = repo
+
+    def show_shopping_list(self, id: int, detail: str = None):
+        shopping_lists = self.repo.get_shopping_lists()
+
+        for shopping_list in shopping_lists:
+            if id == shopping_list['id']:
+                if detail is None:
+                    return shopping_list
+                if detail in shopping_list:
+                    return shopping_list[detail]
+                else:
+                    return None
+        return None
+
+
 class AddShoppingListUseCase:
     def __init__(self, repo: ShoppingLists):
         self.repo = repo
