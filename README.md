@@ -34,7 +34,7 @@ Open browser and go to ```http://127.0.0.1:8080/meals```
 - [x] Generate API to get recipes
 - [x] API for a random meal
 - [x] add and show shopping lists
-- [ ] delete shopping lists
+- [x] delete shopping lists
 - [ ] add items to shopping list by meal id
 - [ ] add specific item to shopping list
 - [ ] add interface to add new recipes

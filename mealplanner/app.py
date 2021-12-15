@@ -2,6 +2,7 @@
 
 from typing import List, Optional
 from fastapi import FastAPI, Depends, Path, HTTPException
+from starlette.responses import Response
 from mealplanner import adapters, services
 
 
@@ -32,6 +33,10 @@ def add_shopping_list_use_case() -> services.AddShoppingListUseCase:
 
 def get_shopping_list_use_case() -> services.ViewShoppingListUseCase:
     return services.ViewShoppingListUseCase(adapters.JsonShoppingListStorage())
+
+
+def delete_shopping_list_use_case() -> services.DeleteShoppingListUseCase:
+    return services.DeleteShoppingListUseCase(adapters.JsonShoppingListStorage())
 
 # API ##
 
@@ -112,3 +117,14 @@ def get_shopping_lists_detail(id: int = Path(..., ge=0),
         raise HTTPException(status_code=404, detail="Item not found")
 
     return use_case.show_shopping_list(id, detail)
+
+
+@app.delete("/shopping_lists/{id}", status_code=204, response_class=Response)
+def delete_shopping_list(id: int = Path(..., ge=0),
+                         use_case=Depends(delete_shopping_list_use_case)):
+    ok = use_case.delete_shopping_list(id)
+
+    if not ok:
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    return

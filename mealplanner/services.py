@@ -146,3 +146,11 @@ class AddShoppingListUseCase:
 
     def add_shopping_list(self) -> ShoppingList:
         return self.repo.add_shopping_list()
+
+
+class DeleteShoppingListUseCase:
+    def __init__(self, repo: ShoppingLists):
+        self.repo = repo
+
+    def delete_shopping_list(self, id: int):
+        return self.repo.delete_shopping_list(id)

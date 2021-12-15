@@ -36,7 +36,6 @@ class JsonShoppingListStorage(s.ShoppingLists):
         if content:
             data = json.loads(content)
             self._storage = data['shoppingLists']
-            print(f"sl storage: {self._storage}")
         else:
             self._storage = []
 
@@ -58,3 +57,17 @@ class JsonShoppingListStorage(s.ShoppingLists):
             data["shoppingLists"] = self._storage
             file.write(json.dumps(data, indent=4))
         return sl
+
+    def delete_shopping_list(self, id: int):
+        for shopping_list in self._storage:
+            if id == shopping_list['id']:
+                self._storage.remove(shopping_list)
+                with open(os.path.join("data", "shopping_lists.json"),
+                          'w',
+                          encoding='utf-8') as file:
+                    data = {}
+                    data["$schema"] = "./shopping_lists_schema.json",
+                    data["shoppingLists"] = self._storage
+                    file.write(json.dumps(data, indent=4))
+                return True
+        return False
