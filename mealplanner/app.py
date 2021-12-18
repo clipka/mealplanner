@@ -53,6 +53,10 @@ def view_meal_plans_use_case() -> services.ViewMealPlansUseCase:
     return services.ViewMealPlansUseCase(adapters.JsonMealPlanStorage())
 
 
+def get_meal_plan_use_case() -> services.ViewMealPlanUseCase:
+    return services.ViewMealPlanUseCase(adapters.JsonMealPlanStorage())
+
+
 # API ##
 
 
@@ -170,3 +174,13 @@ def add_meal_to_shopping_list(id: int = Path(..., ge=0),
 @app.get("/meal_plans", response_model=List[services.MealPlan])
 def get_meal_plans(use_case=Depends(view_meal_plans_use_case)):
     return use_case.get_meal_plans()
+
+
+@app.get("/meal_plans/{id}", response_model=services.MealPlan)
+def get_meal_plan(id: int = Path(..., ge=0), use_case=Depends(get_meal_plan_use_case)):
+    meal_plan = use_case.get_meal_plan(id)
+
+    if meal_plan is None:
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    return use_case.get_meal_plan(id)

@@ -247,3 +247,11 @@ class ViewMealPlansUseCase:
 
     def get_meal_plans(self) -> List[MealPlan]:
         return self.repo.get_meal_plans()
+
+
+class ViewMealPlanUseCase:
+    def __init__(self, repo: MealPlans):
+        self.repo = repo
+
+    def get_meal_plan(self, id: int) -> MealPlan:
+        return self.repo.get_meal_plan(id)

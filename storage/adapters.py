@@ -112,3 +112,10 @@ class JsonMealPlanStorage(s.MealPlans):
 
     def get_meal_plans(self) -> List[s.MealPlan]:
         return self._storage
+
+    def get_meal_plan(self, id: int) -> s.MealPlan:
+        for meal_plan in self._storage:
+            if id == meal_plan['id']:
+                return s.MealPlan(id=meal_plan['id'],
+                                  courses=meal_plan['courses'],
+                                  shoppingListId=meal_plan['shoppingListId'])
