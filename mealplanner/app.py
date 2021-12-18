@@ -13,15 +13,15 @@ app = FastAPI()
 
 
 def get_use_case() -> services.ShowMealsUseCase:
-    return services.ShowMealsUseCase(adapters.JsonStorage())
+    return services.ShowMealsUseCase(adapters.JsonMealListStorage())
 
 
 def get_meal_use_case() -> services.ShowMealDetailsUseCase:
-    return services.ShowMealDetailsUseCase(adapters.JsonStorage())
+    return services.ShowMealDetailsUseCase(adapters.JsonMealListStorage())
 
 
 def get_random_use_case() -> services.ShowRandomMealUseCase:
-    return services.ShowRandomMealUseCase(adapters.JsonStorage())
+    return services.ShowRandomMealUseCase(adapters.JsonMealListStorage())
 
 
 def get_shopping_lists_use_case() -> services.ViewShoppingListsUseCase:
@@ -45,7 +45,13 @@ def add_item_to_shopping_list_use_case() -> services.AddItemToShoppingListUseCas
 
 
 def add_meal_ingredients_to_shopping_list_use_case() -> services.AddMealIngredientsToShoppingListUseCase:
-    return services.AddMealIngredientsToShoppingListUseCase(adapters.JsonShoppingListStorage(), adapters.JsonStorage())
+    return services.AddMealIngredientsToShoppingListUseCase(adapters.JsonShoppingListStorage(),
+                                                            adapters.JsonMealListStorage())
+
+
+def view_meal_plans_use_case() -> services.ViewMealPlansUseCase:
+    return services.ViewMealPlansUseCase(adapters.JsonMealPlanStorage())
+
 
 # API ##
 
@@ -159,3 +165,8 @@ def add_meal_to_shopping_list(id: int = Path(..., ge=0),
         raise HTTPException(status_code=404, detail="Item not found")
 
     return
+
+
+@app.get("/meal_plans", response_model=List[services.MealPlan])
+def get_meal_plans(use_case=Depends(view_meal_plans_use_case)):
+    return use_case.get_meal_plans()

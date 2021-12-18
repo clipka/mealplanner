@@ -1,0 +1,52 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "mealPlans": {
+        "type": "array",
+        "items": {
+            "$ref": "#/definitions/mealPlan"
+        }
+    },
+    "required": [ "mealPlans"],
+    "definitions": {
+        "mealPlan": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "id": {
+                    "type": "integer",
+                    "description": "unique id of meal plan"
+                },
+                "courses": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/course"
+                    }
+                },
+                "shoppingListId": {
+                    "type": "integer",
+                    "description": "id of corresponding shopping list"
+                }
+           },
+           "required": [ "id", "courses", "shoppingListId" ]
+        },
+        "course": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "day": {
+                    "type": "date",
+                    "description": "day of the course"
+                },
+                "courseType": {
+                    "type": "string",
+                    "enum": [ "breakfast", "lunch", "dinner" ]
+                },
+                "mealId": {
+                    "type": "integer",
+                    "description": "id of meal"
+                }
+            },
+            "required": [ "id", "courseType", "mealId" ]
+        }
+    }
+}

@@ -5,7 +5,7 @@ from typing import List
 from mealplanner import services as s
 
 
-class JsonStorage(s.MealPlanner):
+class JsonMealListStorage(s.MealList):
 
     def __init__(self):
         with open(os.path.join("data", "recipes.json"), 'r', encoding='utf-8') as file:
@@ -97,3 +97,18 @@ class JsonShoppingListStorage(s.ShoppingLists):
                 return True
 
         return False
+
+
+class JsonMealPlanStorage(s.MealPlans):
+
+    def __init__(self):
+        with open(os.path.join("data", "meal_plans.json"), 'r', encoding='utf-8') as file:
+            content = file.read()
+        if content:
+            data = json.loads(content)
+            self._storage = data['mealPlans']
+        else:
+            self._storage = []
+
+    def get_meal_plans(self) -> List[s.MealPlan]:
+        return self._storage

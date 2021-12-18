@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import random
+from enum import Enum
+from datetime import date
 from typing import Optional, List
 from pydantic import BaseModel
 
@@ -31,7 +33,7 @@ class MealFilter(BaseModel):
     tag: Optional[str] = None
 
 
-class MealPlanner:
+class MealList:
     def get_meals(self, filters: MealFilter) -> List[Meal]: ...
 
 
@@ -44,8 +46,33 @@ class ShoppingLists:
     def get_shooping_lists() -> List[ShoppingList]: ...
 
 
+class CourseType(str, Enum):
+    breakfast = "breakfast"
+    lunch = "lunch"
+    dinner = "dinner"
+
+
+class Course(BaseModel):
+    day: date
+    courseType: CourseType
+    mealId: int
+
+
+class MealPlan(BaseModel):
+    id: int
+    courses: List[Course]
+    shoppingListId: int
+
+
+class MealPlans:
+    def get_meal_plans() -> List[MealPlan]: ...
+
+
+# Use Cases
+
+
 class ShowMealsUseCase:
-    def __init__(self, repo: MealPlanner):
+    def __init__(self, repo: MealList):
         self.repo = repo
 
     def show_meals(self, filters: MealFilter) -> List[Meal]:
@@ -54,7 +81,7 @@ class ShowMealsUseCase:
 
 
 class ShowRandomMealUseCase:
-    def __init__(self, repo: MealPlanner):
+    def __init__(self, repo: MealList):
         self.repo = repo
 
     def show_random_meals(self, num) -> List[Meal]:
@@ -69,7 +96,7 @@ class ShowRandomMealUseCase:
 
 
 class ShowMealDetailsUseCase:
-    def __init__(self, repo: MealPlanner):
+    def __init__(self, repo: MealList):
         self.repo = repo
 
     def show_meal(self, id: int, detail: str = None) -> Meal:
@@ -84,7 +111,7 @@ class ShowMealDetailsUseCase:
 
 
 class ShoppingListUseCase:
-    def __init__(self, repo: MealPlanner):
+    def __init__(self, repo: MealList):
         self.repo = repo
 
     def get_shopping_list(self, ids: List[int]) -> ShoppingList:
@@ -186,7 +213,7 @@ class AddItemToShoppingListUseCase:
 
 
 class AddMealIngredientsToShoppingListUseCase:
-    def __init__(self, shopping_list_repo: ShoppingLists, meal_planner_repo: MealPlanner):
+    def __init__(self, shopping_list_repo: ShoppingLists, meal_planner_repo: MealList):
         self.shopping_list_repo = shopping_list_repo
         self.meal_planner_repo = meal_planner_repo
 
@@ -212,3 +239,11 @@ class AddMealIngredientsToShoppingListUseCase:
             add_item_uc.add_item(shopping_list_id, ingredient)
 
         return True
+
+
+class ViewMealPlansUseCase:
+    def __init__(self, repo: MealPlans):
+        self.repo = repo
+
+    def get_meal_plans(self) -> List[MealPlan]:
+        return self.repo.get_meal_plans()
