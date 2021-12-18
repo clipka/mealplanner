@@ -162,8 +162,6 @@ class AddItemToShoppingListUseCase:
     def add_item(self, id: int, item: Ingredient) -> bool:
         sl = self.repo.get_shopping_list(id)
 
-        print(f"shoppinglist: {sl}")
-
         if sl is None:
             return False
 
@@ -182,7 +180,35 @@ class AddItemToShoppingListUseCase:
             if not _found:
                 sl.items.append(item)
 
-        print(f"shoppinglist: {sl}")
         self.repo.update_shopping_list(sl)
+
+        return True
+
+
+class AddMealIngredientsToShoppingListUseCase:
+    def __init__(self, shopping_list_repo: ShoppingLists, meal_planner_repo: MealPlanner):
+        self.shopping_list_repo = shopping_list_repo
+        self.meal_planner_repo = meal_planner_repo
+
+    def add_meal_ingredients(self, shopping_list_id: int, meal_id: int) -> bool:
+        sl = self.shopping_list_repo.get_shopping_list(shopping_list_id)
+        if sl is None:
+            return False
+
+        show_meal_details_uc = ShowMealDetailsUseCase(self.meal_planner_repo)
+        ingredients = show_meal_details_uc.show_meal(meal_id, "ingredients")
+        if ingredients is None:
+            return False
+
+        add_item_uc = AddItemToShoppingListUseCase(self.shopping_list_repo)
+
+        for i in ingredients:
+            ingredient = Ingredient(name=i['name'])
+            if 'amount' in i:
+                ingredient.amount = i['amount']
+            if 'unit' in i:
+                ingredient.unit = i['unit']
+
+            add_item_uc.add_item(shopping_list_id, ingredient)
 
         return True

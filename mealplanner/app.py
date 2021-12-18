@@ -43,6 +43,10 @@ def delete_shopping_list_use_case() -> services.DeleteShoppingListUseCase:
 def add_item_to_shopping_list_use_case() -> services.AddItemToShoppingListUseCase:
     return services.AddItemToShoppingListUseCase(adapters.JsonShoppingListStorage())
 
+
+def add_meal_ingredients_to_shopping_list_use_case() -> services.AddMealIngredientsToShoppingListUseCase:
+    return services.AddMealIngredientsToShoppingListUseCase(adapters.JsonShoppingListStorage(), adapters.JsonStorage())
+
 # API ##
 
 
@@ -135,11 +139,22 @@ def delete_shopping_list(id: int = Path(..., ge=0),
     return
 
 
-@app.post("/shopping_lists/{id}", status_code=200, response_class=Response)
+@app.post("/shopping_lists/{id}/add_item", status_code=200, response_class=Response)
 def add_item_to_shopping_list(id: int = Path(..., ge=0),
                               item: services.Ingredient = Body(..., ne=None),
                               use_case=Depends(add_item_to_shopping_list_use_case)):
     ok = use_case.add_item(id, item)
+    if not ok:
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    return
+
+
+@app.post("/shopping_lists/{id}/add_meal", status_code=200, response_class=Response)
+def add_meal_to_shopping_list(id: int = Path(..., ge=0),
+                              meal_id: int = Body(..., ge=0),
+                              use_case=Depends(add_meal_ingredients_to_shopping_list_use_case)):
+    ok = use_case.add_meal_ingredients(id, meal_id)
     if not ok:
         raise HTTPException(status_code=404, detail="Item not found")
 

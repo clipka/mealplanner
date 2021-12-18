@@ -85,7 +85,7 @@ class JsonShoppingListStorage(s.ShoppingLists):
                 sl['items'] = []
                 for item in shopping_list.items:
                     sl['items'].append(item.dict())
-                print(f"sl: {sl}")
+
                 with open(os.path.join("data", "shopping_lists.json"),
                           'w',
                           encoding='utf-8') as file:
@@ -93,5 +93,7 @@ class JsonShoppingListStorage(s.ShoppingLists):
                     data["$schema"] = "./shopping_lists_schema.json",
                     data["shoppingLists"] = self._storage
                     file.write(json.dumps(data, indent=4))
+
                 return True
+
         return False
