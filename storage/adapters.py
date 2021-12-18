@@ -58,10 +58,34 @@ class JsonShoppingListStorage(s.ShoppingLists):
             file.write(json.dumps(data, indent=4))
         return sl
 
-    def delete_shopping_list(self, id: int):
+    def delete_shopping_list(self, id: int) -> bool:
         for shopping_list in self._storage:
             if id == shopping_list['id']:
                 self._storage.remove(shopping_list)
+                with open(os.path.join("data", "shopping_lists.json"),
+                          'w',
+                          encoding='utf-8') as file:
+                    data = {}
+                    data["$schema"] = "./shopping_lists_schema.json",
+                    data["shoppingLists"] = self._storage
+                    file.write(json.dumps(data, indent=4))
+                return True
+        return False
+
+    def get_shopping_list(self, id: int) -> s.ShoppingList:
+        for shopping_list in self._storage:
+            if id == shopping_list['id']:
+                return s.ShoppingList(id=shopping_list['id'], items=shopping_list['items'])
+
+        return None
+
+    def update_shopping_list(self, shopping_list: s.ShoppingList) -> bool:
+        for sl in self._storage:
+            if sl['id'] == shopping_list.id:
+                sl['items'] = []
+                for item in shopping_list.items:
+                    sl['items'].append(item.dict())
+                print(f"sl: {sl}")
                 with open(os.path.join("data", "shopping_lists.json"),
                           'w',
                           encoding='utf-8') as file:

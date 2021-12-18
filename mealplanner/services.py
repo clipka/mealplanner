@@ -153,3 +153,36 @@ class DeleteShoppingListUseCase:
 
     def delete_shopping_list(self, id: int):
         return self.repo.delete_shopping_list(id)
+
+
+class AddItemToShoppingListUseCase:
+    def __init__(self, repo: ShoppingLists):
+        self.repo = repo
+
+    def add_item(self, id: int, item: Ingredient) -> bool:
+        sl = self.repo.get_shopping_list(id)
+
+        print(f"shoppinglist: {sl}")
+
+        if sl is None:
+            return False
+
+        if len(sl.items) == 0:
+            sl.items.append(item)
+        else:
+            _found = False
+            # check if ingredient is in shoppinglist already
+            # if in, just increase amount if available
+            for i in sl.items:
+                if i.name == item.name:
+                    _found = True
+                    if i.amount:
+                        i.amount += i.amount
+
+            if not _found:
+                sl.items.append(item)
+
+        print(f"shoppinglist: {sl}")
+        self.repo.update_shopping_list(sl)
+
+        return True
