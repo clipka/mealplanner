@@ -255,3 +255,19 @@ class ViewMealPlanUseCase:
 
     def get_meal_plan(self, id: int) -> MealPlan:
         return self.repo.get_meal_plan(id)
+
+
+class AddMealPlantUseCase:
+    def __init__(self, repo: MealPlans):
+        self.repo = repo
+
+    def add_meal_plan(self, courses: List[Course]) -> MealPlan:
+        return self.repo.add_meal_plan(courses)
+
+
+class DeleteMealPlanUseCase:
+    def __init__(self, repo: MealPlans):
+        self.repo = repo
+
+    def delete_meal_plan(self, id: int):
+        return self.repo.delete_meal_plan(id)

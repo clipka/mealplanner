@@ -119,3 +119,37 @@ class JsonMealPlanStorage(s.MealPlans):
                 return s.MealPlan(id=meal_plan['id'],
                                   courses=meal_plan['courses'],
                                   shoppingListId=meal_plan['shoppingListId'])
+
+    def add_meal_plan(self, courses: List[s.Course] = None) -> s.MealPlan:
+        if len(self._storage) == 0:
+            id = 0
+        else:
+            id = self._storage[len(self._storage)-1]['id'] + 1
+
+        if courses is not None:
+            mp = s.MealPlan(id=id, courses=courses, shoppingListId=-1)
+        else:
+            mp = s.MealPlan(id=id, courses=[], shoppingListId=-1)
+
+        self._storage.append(mp.dict())
+
+        with open(os.path.join("data", "meal_plans.json"), 'w', encoding='utf-8') as file:
+            data = {}
+            data["$schema"] = "../storage/meal_plan_schema.json",
+            data["mealPlans"] = self._storage
+            file.write(json.dumps(data, indent=4))
+        return mp
+
+    def delete_meal_plan(self, id: int) -> bool:
+        for meal_plan in self._storage:
+            if id == meal_plan['id']:
+                self._storage.remove(meal_plan)
+                with open(os.path.join("data", "meal_plans.json"),
+                          'w',
+                          encoding='utf-8') as file:
+                    data = {}
+                    data["$schema"] = "../storage/meal_plan_schema.json",
+                    data["mealPlans"] = self._storage
+                    file.write(json.dumps(data, indent=4))
+                return True
+        return False

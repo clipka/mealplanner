@@ -57,6 +57,13 @@ def get_meal_plan_use_case() -> services.ViewMealPlanUseCase:
     return services.ViewMealPlanUseCase(adapters.JsonMealPlanStorage())
 
 
+def add_meal_plan_use_case() -> services.AddMealPlantUseCase:
+    return services.AddMealPlantUseCase(adapters.JsonMealPlanStorage())
+
+
+def delete_meal_plan_use_case() -> services.DeleteMealPlanUseCase:
+    return services.DeleteMealPlanUseCase(adapters.JsonMealPlanStorage())
+
 # API ##
 
 
@@ -184,3 +191,19 @@ def get_meal_plan(id: int = Path(..., ge=0), use_case=Depends(get_meal_plan_use_
         raise HTTPException(status_code=404, detail="Item not found")
 
     return use_case.get_meal_plan(id)
+
+
+@app.post("/meal_plans", response_model=services.MealPlan)
+def add_meal_plan(courses: List[services.Course] = Body(default=None), use_case=Depends(add_meal_plan_use_case)):
+    return use_case.add_meal_plan(courses)
+
+
+@app.delete("/meal_plans/{id}", status_code=204, response_class=Response)
+def delete_meal_plan(id: int = Path(..., ge=0),
+                     use_case=Depends(delete_meal_plan_use_case)):
+    ok = use_case.delete_meal_plan(id)
+
+    if not ok:
+        raise HTTPException(status_code=404, detail="Item not found")
+
+    return
