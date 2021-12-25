@@ -69,12 +69,10 @@
             "type": "object",
             "properties": {
                 "name": {
-                    "type": "string",
-                    "amount": "integer",
-                    "unit": "string"
+                    "type": "string"
                 },
                 "amount": {
-                    "type": "integer"
+                    "type": "float"
                 },
                 "unit": {
                     "type": "string"

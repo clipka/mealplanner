@@ -13,7 +13,7 @@ class Effort(BaseModel):
 
 class Ingredient(BaseModel):
     name: str
-    amount: Optional[int]
+    amount: Optional[float]
     unit: Optional[str]
 
 
@@ -57,6 +57,9 @@ class Course(BaseModel):
     courseType: CourseType
     servings: int
     mealId: int
+
+    class Config:
+        use_enum_values = True
 
 
 class MealPlan(BaseModel):
@@ -218,7 +221,7 @@ class AddMealIngredientsToShoppingListUseCase:
         self.shopping_list_repo = shopping_list_repo
         self.meal_planner_repo = meal_planner_repo
 
-    def add_meal_ingredients(self, shopping_list_id: int, meal_id: int) -> bool:
+    def add_meal_ingredients(self, shopping_list_id: int, meal_id: int, servings: int = -1) -> bool:
         sl = self.shopping_list_repo.get_shopping_list(shopping_list_id)
         if sl is None:
             return False
@@ -230,10 +233,16 @@ class AddMealIngredientsToShoppingListUseCase:
 
         add_item_uc = AddItemToShoppingListUseCase(self.shopping_list_repo)
 
+        # calculate servings quotient
+        servings_quotient = 1.0
+        if servings != -1:
+            meal_default_servings = show_meal_details_uc.show_meal(meal_id, "servings")
+            servings_quotient = float(servings) / float(meal_default_servings)
+
         for i in ingredients:
             ingredient = Ingredient(name=i['name'])
             if 'amount' in i:
-                ingredient.amount = i['amount']
+                ingredient.amount = i['amount'] * servings_quotient
             if 'unit' in i:
                 ingredient.unit = i['unit']
 

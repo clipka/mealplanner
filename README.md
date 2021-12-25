@@ -45,3 +45,10 @@ Open browser and go to ```http://127.0.0.1:8080/meals```
 - [ ] calculate amount of servings based on baselined ingredients
 - [ ] connect Alexa to meal planner to tell what to cook today
 - [ ] ...
+
+## TODO
+
+- [ ] Dependency Injection
+
+Due to the way I use Depends() to integrate use cases, I initiate storage models before using them.
+Therefore, I cannot create a shopping list and add items to it in the same invocation. That needs to be fixed.

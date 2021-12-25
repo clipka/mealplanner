@@ -197,11 +197,21 @@ def get_meal_plan(id: int = Path(..., ge=0), use_case=Depends(get_meal_plan_use_
 def add_meal_plan(courses: List[services.Course] = Body(default=[]),
                   shoppingListId: int = Body(default=-1),
                   add_meal_plan_use_case=Depends(add_meal_plan_use_case),
-                  add_shoppling_list_use_case=Depends(add_shopping_list_use_case)):
-    if shoppingListId == -1:
-        sl = add_shoppling_list_use_case.add_shopping_list()
-        shoppingListId = sl.id
-    return add_meal_plan_use_case.add_meal_plan(courses, shoppingListId)
+                  add_shoppling_list_use_case=Depends(add_shopping_list_use_case),
+                  get_shopping_list_use_case=Depends(get_shopping_list_use_case),
+                  add_meal_integrients_use_case=Depends(add_meal_ingredients_to_shopping_list_use_case)):
+
+    shopping_list = get_shopping_list_use_case.show_shopping_list(shoppingListId)
+    if shopping_list is None:
+        return HTTPException(status_code=404, detail=f"shopping list id {shoppingListId} not found.")
+
+    meal_plan = add_meal_plan_use_case.add_meal_plan(courses, shoppingListId)
+
+    # add courses meals to shopping list
+    for course in meal_plan.courses:
+        add_meal_integrients_use_case.add_meal_ingredients(shoppingListId, course.mealId, course.servings)
+
+    return meal_plan
 
 
 @app.delete("/meal_plans/{id}", status_code=204, response_class=Response)

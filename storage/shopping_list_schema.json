@@ -33,7 +33,7 @@
                     "type": "string"
                 },
                 "amount": {
-                    "type": "integer"
+                    "type": "float"
                 },
                 "unit": {
                     "type": "string"

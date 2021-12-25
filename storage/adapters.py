@@ -56,6 +56,7 @@ class JsonShoppingListStorage(s.ShoppingLists):
             data["$schema"] = "./shopping_lists_schema.json",
             data["shoppingLists"] = self._storage
             file.write(json.dumps(data, indent=4))
+            file.flush()
         return sl
 
     def delete_shopping_list(self, id: int) -> bool:
@@ -69,6 +70,7 @@ class JsonShoppingListStorage(s.ShoppingLists):
                     data["$schema"] = "./shopping_lists_schema.json",
                     data["shoppingLists"] = self._storage
                     file.write(json.dumps(data, indent=4))
+                    file.flush()
                 return True
         return False
 
@@ -93,7 +95,7 @@ class JsonShoppingListStorage(s.ShoppingLists):
                     data["$schema"] = "./shopping_lists_schema.json",
                     data["shoppingLists"] = self._storage
                     file.write(json.dumps(data, indent=4))
-
+                    file.flush()
                 return True
 
         return False
@@ -134,7 +136,8 @@ class JsonMealPlanStorage(s.MealPlans):
             data = {}
             data["$schema"] = "../storage/meal_plan_schema.json",
             data["mealPlans"] = self._storage
-            file.write(json.dumps(data, indent=4))
+            file.write(json.dumps(data, indent=4, default=str))
+            file.flush()
         return mp
 
     def delete_meal_plan(self, id: int) -> bool:
@@ -145,8 +148,9 @@ class JsonMealPlanStorage(s.MealPlans):
                           'w',
                           encoding='utf-8') as file:
                     data = {}
-                    data["$schema"] = "../storage/meal_plan_schema.json",
+                    data["$schema"] = "../storage/meal_plan_schema.json"
                     data["mealPlans"] = self._storage
                     file.write(json.dumps(data, indent=4))
+                    file.flush()
                 return True
         return False
