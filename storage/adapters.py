@@ -120,16 +120,13 @@ class JsonMealPlanStorage(s.MealPlans):
                                   courses=meal_plan['courses'],
                                   shoppingListId=meal_plan['shoppingListId'])
 
-    def add_meal_plan(self, courses: List[s.Course] = None) -> s.MealPlan:
+    def add_meal_plan(self, courses: List[s.Course] = [], shoppingListId: int = -1) -> s.MealPlan:
         if len(self._storage) == 0:
             id = 0
         else:
             id = self._storage[len(self._storage)-1]['id'] + 1
 
-        if courses is not None:
-            mp = s.MealPlan(id=id, courses=courses, shoppingListId=-1)
-        else:
-            mp = s.MealPlan(id=id, courses=[], shoppingListId=-1)
+        mp = s.MealPlan(id=id, courses=courses, shoppingListId=shoppingListId)
 
         self._storage.append(mp.dict())
 

@@ -194,8 +194,14 @@ def get_meal_plan(id: int = Path(..., ge=0), use_case=Depends(get_meal_plan_use_
 
 
 @app.post("/meal_plans", response_model=services.MealPlan)
-def add_meal_plan(courses: List[services.Course] = Body(default=None), use_case=Depends(add_meal_plan_use_case)):
-    return use_case.add_meal_plan(courses)
+def add_meal_plan(courses: List[services.Course] = Body(default=[]),
+                  shoppingListId: int = Body(default=-1),
+                  add_meal_plan_use_case=Depends(add_meal_plan_use_case),
+                  add_shoppling_list_use_case=Depends(add_shopping_list_use_case)):
+    if shoppingListId == -1:
+        sl = add_shoppling_list_use_case.add_shopping_list()
+        shoppingListId = sl.id
+    return add_meal_plan_use_case.add_meal_plan(courses, shoppingListId)
 
 
 @app.delete("/meal_plans/{id}", status_code=204, response_class=Response)

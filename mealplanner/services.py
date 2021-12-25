@@ -55,6 +55,7 @@ class CourseType(str, Enum):
 class Course(BaseModel):
     day: date
     courseType: CourseType
+    servings: int
     mealId: int
 
 
@@ -261,8 +262,8 @@ class AddMealPlantUseCase:
     def __init__(self, repo: MealPlans):
         self.repo = repo
 
-    def add_meal_plan(self, courses: List[Course]) -> MealPlan:
-        return self.repo.add_meal_plan(courses)
+    def add_meal_plan(self, courses: List[Course], shoppingListId: int) -> MealPlan:
+        return self.repo.add_meal_plan(courses, shoppingListId)
 
 
 class DeleteMealPlanUseCase:
