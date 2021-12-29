@@ -64,6 +64,10 @@ def add_meal_plan_use_case() -> services.AddMealPlantUseCase:
 def delete_meal_plan_use_case() -> services.DeleteMealPlanUseCase:
     return services.DeleteMealPlanUseCase(adapters.JsonMealPlanStorage())
 
+
+def add_course_to_meal_plan_use_case() -> services.AddCourseToMealPlanUseCase:
+    return services.AddCourseToMealPlanUseCase(adapters.JsonMealPlanStorage())
+
 # API ##
 
 
@@ -199,7 +203,7 @@ def add_meal_plan(courses: List[services.Course] = Body(default=[]),
                   add_meal_plan_use_case=Depends(add_meal_plan_use_case),
                   add_shoppling_list_use_case=Depends(add_shopping_list_use_case),
                   get_shopping_list_use_case=Depends(get_shopping_list_use_case),
-                  add_meal_integrients_use_case=Depends(add_meal_ingredients_to_shopping_list_use_case)):
+                  add_meal_ingrients_use_case=Depends(add_meal_ingredients_to_shopping_list_use_case)):
 
     shopping_list = get_shopping_list_use_case.show_shopping_list(shoppingListId)
     if shopping_list is None:
@@ -209,7 +213,7 @@ def add_meal_plan(courses: List[services.Course] = Body(default=[]),
 
     # add courses meals to shopping list
     for course in meal_plan.courses:
-        add_meal_integrients_use_case.add_meal_ingredients(shoppingListId, course.mealId, course.servings)
+        add_meal_ingrients_use_case.add_meal_ingredients(shoppingListId, course.mealId, course.servings)
 
     return meal_plan
 
@@ -223,3 +227,20 @@ def delete_meal_plan(id: int = Path(..., ge=0),
         raise HTTPException(status_code=404, detail="Item not found")
 
     return
+
+
+@app.post("/meal_plans/{id}/add_course", status_code=201, response_class=Response)
+def add_course_to_meal_plan(id: int = Path(..., ge=0),
+                            course: services.Course = Body(...),
+                            get_meal_plan_use_case=Depends(get_meal_plan_use_case),
+                            add_course_to_meal_plan_use_case=Depends(add_course_to_meal_plan_use_case),
+                            add_meal_ingredients_use_case=Depends(add_meal_ingredients_to_shopping_list_use_case)):
+    meal_plan = get_meal_plan_use_case.get_meal_plan(id)
+    if meal_plan is None:
+        raise HTTPException(status_code=404, detail=f"Meal plan id: {id} not found")
+
+    ok = add_course_to_meal_plan_use_case.add_course(id, course)
+    if not ok:
+        raise HTTPException(status_code=404, detail="Cannot add course")
+
+    add_meal_ingredients_use_case.add_meal_ingredients(meal_plan.shoppingListId, course.mealId, course.servings)

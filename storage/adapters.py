@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import date
 import os
 import json
 from typing import List
@@ -121,6 +122,7 @@ class JsonMealPlanStorage(s.MealPlans):
                 return s.MealPlan(id=meal_plan['id'],
                                   courses=meal_plan['courses'],
                                   shoppingListId=meal_plan['shoppingListId'])
+        return None
 
     def add_meal_plan(self, courses: List[s.Course] = [], shoppingListId: int = -1) -> s.MealPlan:
         if len(self._storage) == 0:
@@ -154,3 +156,22 @@ class JsonMealPlanStorage(s.MealPlans):
                     file.flush()
                 return True
         return False
+
+    def add_course(self, id: int, course: s.Course) -> bool:
+        meal_plan = self.get_meal_plan(id)
+        if meal_plan is None:
+            return False
+
+        meal_plan.courses.append(course)
+        meal_plan.courses.sort(key=lambda x: date.strftime(x.day, '%Y-%m-%d'))
+
+        self.delete_meal_plan(id)
+        self._storage.append(meal_plan.dict())
+
+        with open(os.path.join("data", "meal_plans.json"), 'w', encoding='utf-8') as file:
+            data = {}
+            data["$schema"] = "../storage/meal_plan_schema.json",
+            data["mealPlans"] = self._storage
+            file.write(json.dumps(data, indent=4, default=str))
+            file.flush()
+        return True

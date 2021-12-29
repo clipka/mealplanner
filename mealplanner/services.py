@@ -281,3 +281,11 @@ class DeleteMealPlanUseCase:
 
     def delete_meal_plan(self, id: int):
         return self.repo.delete_meal_plan(id)
+
+
+class AddCourseToMealPlanUseCase:
+    def __init__(self, repo: MealPlans):
+        self.repo = repo
+
+    def add_course(self, id: int, course: Course) -> bool:
+        return self.repo.add_course(id, course)
