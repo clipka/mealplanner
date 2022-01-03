@@ -1,5 +1,16 @@
 {
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": ["--config=.flake8"]
+    "python.linting.flake8Args": [
+        "--config=.flake8"
+    ],
+    "spellright.language": [
+        "de",
+        "en"
+    ],
+    "spellright.documentTypes": [
+        "markdown",
+        "latex",
+        "plaintext"
+    ]
 }

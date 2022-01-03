@@ -3,7 +3,7 @@
 A just for fun project to learn FastAPI and mechanics of API and service development.
 
 Initial structure of the project is based on: https://github.com/zueve/rentomatic which provides a lean view on the Clean Architecture approach.
-
+The frontend is build with React based on the NetNinja Youtube tutorial (https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d)
 
 Mealplanner is a collection of food that the family enjoys eating. Goal is to create a list of recipes that can be chosen via an API. Out of this list of recipes, a shopping list can be generated to ease the weekly grocery shopping.
 
