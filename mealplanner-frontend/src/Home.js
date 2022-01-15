@@ -1,7 +1,13 @@
+import MealsList from "./MealsList";
+import useFetch from "./useFetch";
+
 const Home = () => {
+    const { error, isPending, data: meals } = useFetch('http://127.0.0.1:8080/meals')
     return (
         <div className="home">
-            <h2>Homepage</h2>
+            { error && <div>{ error }</div> }
+            { isPending && <div>Loading...</div> }
+            { meals && <MealsList meals={meals} /> }
         </div>
      );
 }
