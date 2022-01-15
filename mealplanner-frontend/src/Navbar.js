@@ -4,6 +4,7 @@ const Navbar = () => {
             <h1>Mealplanner</h1>
             <div className="links">
                 <a href="/">Home</a>
+                <a href="/shoppingLists">Einkaufslisten</a>
             </div>
         </nav>
      );
